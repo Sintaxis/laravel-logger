@@ -1,6 +1,14 @@
 {
     "name": "crudlog/laravel-logger",
     "description": "The official CrudLog client package for implicitly logging activities in Laravel applications.",
+    "keywords": [
+        "crudlog",
+        "laravel",
+        "logging",
+        "auditing",
+        "activity-log"
+    ],
+    "homepage": "https://github.com/Sintaxis/laravel-logger",
     "type": "library",
     "license": "MIT",
     "autoload": {
@@ -11,7 +19,9 @@
     "authors": [
         {
             "name": "Panayiotis Pateras",
-            "email": "pateras80@gmail.com"
+            "email": "pateras80@gmail.com",
+            "homepage": "https://crudlog.com",
+            "role": "Developer"
         }
     ],
     "require": {
