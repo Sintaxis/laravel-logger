@@ -29,12 +29,6 @@ class LogModelChange
         $dispatchMethod = config('logging-service.dispatch_method', env('CRUDLOG_DISPATCH_METHOD', 'async'));
         $apiKey = config('logging-service.api_key', env('CRUDLOG_API_KEY'));
         $apiEndpoint = config('logging-service.endpoint', env('CRUDLOG_ENDPOINT', 'http://crudlog.test/api/v1/log/async'));
-Log::info('CrudLog Service: Logging event', [
-            'action' => $event->action,
-            'model' => get_class($event->loggable),
-            'model_id' => $event->loggable->getKey(),
-            'payload' => $event->payload,
-        ]);
         if (!$apiKey || !$apiEndpoint) {
             Log::error('CrudLog Service: API Key or Endpoint is not configured. Logging is disabled.');
             return;
