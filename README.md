@@ -32,7 +32,7 @@ This will create a `config/logging-service.php` file in your application.
 
 ## Configuration
 
-Finally, add your CrudLog API Key and preferred dispatch method to your application's `.env` file. You can generate an API key from your [CrudLog API Keys dashboard](https://crudlog.test/account/api-keys).
+Finally, add your CrudLog API Key and preferred dispatch method to your application's `.env` file. You can generate an API key from your [CrudLog API Keys dashboard](https://crudlog.com/account/api-keys).
 
 ```dotenv
 CRUDLOG_API_KEY="your-api-key-here"
@@ -54,7 +54,7 @@ Our service will now automatically start capturing events for the models you've 
 
 ## Security
 
-If you discover any security related issues, please email [your-security-email@crudlog.test](mailto:your-security-email@crudlog.test) instead of using the issue tracker.
+If you discover any security related issues, please email [support@crudlog.com](mailto:support@crudlog.com) instead of using the issue tracker.
 
 ## License
 

@@ -24,8 +24,8 @@ return [
     | or have been instructed to by CrudLog support.
     |
     */
-    'config_endpoint' => env('CRUDLOG_CONFIG_ENDPOINT', 'https://crudlog.test/api/v1/config'), // Replace with your production URL
-    'endpoint' => env('CRUDLOG_ENDPOINT', 'https://crudlog.test/api/v1/log/async'), // Replace with your production URL
+    'config_endpoint' => env('CRUDLOG_CONFIG_ENDPOINT', 'https://crudlog.com/api/v1/config'), // Replace with your production URL
+    'endpoint' => env('CRUDLOG_ENDPOINT', 'https://crudlog.com/api/v1/log/async'), // Replace with your production URL
 
     /*
     |--------------------------------------------------------------------------
