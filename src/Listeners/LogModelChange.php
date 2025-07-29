@@ -28,7 +28,7 @@ class LogModelChange
         // The config file would read from the tenant's .env file.
         $dispatchMethod = config('logging-service.dispatch_method', env('CRUDLOG_DISPATCH_METHOD', 'async'));
         $apiKey = config('logging-service.api_key', env('CRUDLOG_API_KEY'));
-        $apiEndpoint = config('logging-service.endpoint', env('CRUDLOG_ENDPOINT', 'http://crudlog.test/api/v1/log/async'));
+        $apiEndpoint = config('logging-service.endpoint', env('CRUDLOG_ENDPOINT', 'http://crudlog.com/api/v1/log/async'));
         if (!$apiKey || !$apiEndpoint) {
             Log::error('CrudLog Service: API Key or Endpoint is not configured. Logging is disabled.');
             return;
