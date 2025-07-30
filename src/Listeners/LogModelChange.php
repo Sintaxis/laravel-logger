@@ -24,8 +24,6 @@ class LogModelChange
      */
     public function handle(ModelLoggableEvent $event): void
     {
-        // In a real package, these would be read from a published config file.
-        // The config file would read from the tenant's .env file.
         $dispatchMethod = config('logging-service.dispatch_method', env('CRUDLOG_DISPATCH_METHOD', 'async'));
         $apiKey = config('logging-service.api_key', env('CRUDLOG_API_KEY'));
         $apiEndpoint = config('logging-service.endpoint', env('CRUDLOG_ENDPOINT', 'http://crudlog.com/api/v1/log/async'));
@@ -64,7 +62,7 @@ class LogModelChange
             try {
                 Http::withToken($apiKey)
                     ->acceptJson()
-                    ->timeout(2) // Short timeout (e.g., 2 seconds)
+                    ->timeout(2)
                     ->post($apiEndpoint, $logData);
             } catch (\Exception $e) {
                 // If our service is down or the request times out, we log the error
