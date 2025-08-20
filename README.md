@@ -3,18 +3,28 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/crudlog/laravel-logger.svg?style=flat-square)](https://packagist.org/packages/crudlog/laravel-logger)
 [![Total Downloads](https://img.shields.io/packagist/dt/crudlog/laravel-logger.svg?style=flat-square)](https://packagist.org/packages/crudlog/laravel-logger)
 
-The official CrudLog client package for Laravel applications. This package provides a seamless, "zero-code on models" experience for implicitly logging Eloquent model events to your CrudLog account.
+**This is the official client package for the CrudLog service. An account at [CrudLog.com](https://crudlog.com) is required to use this package.**
 
-## Features
+CrudLog provides a complete, managed service for activity logging and audit trails. This Laravel package is the easiest way to implement "implicit logging" by automatically capturing Eloquent model events without changing your existing code.
 
-- **Implicit Logging:** Automatically log `created`, `updated`, and `deleted` events for any Eloquent model.
-- **Configuration Driven:** All settings are managed from your CrudLog dashboard—no need to define what to log in your code.
-- **Asynchronous by Default:** Uses your application's queue for maximum performance, ensuring your user requests are never slowed down by logging.
-- **Tenant-Aware:** Securely associates all logs with your specific account.
+---
+
+## What is CrudLog?
+
+CrudLog is a SaaS platform that gives developers a powerful, framework-agnostic solution for logging user activities. Stop building audit trails from scratch. Our service provides:
+
+- A secure, scalable backend to store your log data.
+- A beautiful web dashboard to view, search, and filter logs.
+- A flexible REST API to send and retrieve log data from any application.
+- Configurable data masking, retention policies, and plan-based usage limits.
+
+**[Create Your Free Account at CrudLog.com](https://crudlog.com/register)**
+
+---
 
 ## Installation
 
-You can install the package via Composer:
+You can install the package into your Laravel 11+ project via Composer:
 
 ```bash
 composer require crudlog/laravel-logger
@@ -22,7 +32,7 @@ composer require crudlog/laravel-logger
 
 The package will automatically register its service provider.
 
-Next, you must publish the configuration file using the `vendor:publish` command:
+Next, you must publish the configuration file:
 
 ```bash
 php artisan vendor:publish --provider="CrudLog\Logger\Providers\LoggableServiceProvider" --tag="crudlog-config"
@@ -32,25 +42,29 @@ This will create a `config/logging-service.php` file in your application.
 
 ## Configuration
 
-Finally, add your CrudLog API Key and preferred dispatch method to your application's `.env` file. You can generate an API key from your [CrudLog API Keys dashboard](https://crudlog.com/account/api-keys).
+Finally, add your CrudLog API Key to your application's `.env` file.
+
+1.  **Sign up** for a free account at [CrudLog.com](https://crudlog.com).
+2.  Navigate to your **Account -> API Keys** dashboard and generate a new key.
+3.  Add the key to your `.env` file:
 
 ```dotenv
 CRUDLOG_API_KEY="your-api-key-here"
-CRUDLOG_DISPATCH_METHOD=async # Can be 'async' (recommended) or 'sync'
+
+# Optional: You can also specify the dispatch method ('async' or 'sync').
+# 'async' is recommended for best performance but requires a queue worker.
+CRUDLOG_DISPATCH_METHOD=async
 ```
 
 ## Usage
 
-Once the package is installed and configured, no further code changes are needed in your application to start logging.
+Once the package is installed and configured, all logging rules are managed from your CrudLog dashboard.
 
-1.  **Log in** to your CrudLog dashboard.
+1.  Log in to your CrudLog account.
 2.  Navigate to the **Logging Configuration** page.
-3.  **Enable Implicit Logging**.
-4.  Add the **fully qualified class names** of the Eloquent models you wish to track (e.g., `App\Models\User`).
-5.  Select the events (`created`, `updated`, `deleted`) you want to monitor for each model.
-6.  **Save** your configuration.
+3.  **Enable Implicit Logging** and add the fully qualified class names of the Eloquent models you wish to track (e.g., `App\Models\User`).
 
-Our service will now automatically start capturing events for the models you've configured.
+For more detailed instructions and advanced usage, please see our full **[Documentation on CrudLog.com](https://crudlog.com/docs)**.
 
 ## Security
 

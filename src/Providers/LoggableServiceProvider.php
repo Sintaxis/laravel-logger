@@ -92,7 +92,6 @@ class LoggableServiceProvider extends ServiceProvider
 
                 if ($response->successful()) {
                     $fetchedConfig = $response->json();
-                    Log::info('CrudLog Service: Fetched and cached fresh configuration.');
                 } else {
                     throw new \Exception('CrudLog Service: Authentication failed or error fetching config. Status: ' . $response->status());
                 }
