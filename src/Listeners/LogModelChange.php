@@ -11,17 +11,6 @@ use Illuminate\Support\Facades\Request;
 
 class LogModelChange
 {
-    /**
-     * Create the event listener.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Handle the event.
-     */
     public function handle(ModelLoggableEvent $event): void
     {
         $dispatchMethod = config('logging-service.dispatch_method', env('CRUDLOG_DISPATCH_METHOD', 'async'));
@@ -32,15 +21,13 @@ class LogModelChange
             return;
         }
 
-        // Assemble the log data payload
         $actingUser = Auth::user();
         $details = [];
         if ($event->action === 'updated') {
             $details['old_values'] = $event->payload['old'] ?? [];
-            $details['new_values'] = $event->loggable->getChanges();
+            $details['new_values'] = $event->payload['filtered_new_values'] ?? [];
         } else {
-            // For created/deleted, log the full model attributes at that point in time.
-            $details['attributes'] = $event->loggable->toArray();
+            $details['attributes'] = $event->payload['filtered_attributes'] ?? [];
         }
 
         $logData = [
@@ -58,15 +45,12 @@ class LogModelChange
         if ($dispatchMethod === 'async') {
             SendLogToApi::dispatch($logData, $apiKey, $apiEndpoint);
         } else {
-        // Make a fast, non-blocking "fire-and-forget" request
             try {
                 Http::withToken($apiKey)
                     ->acceptJson()
                     ->timeout(2)
                     ->post($apiEndpoint, $logData);
             } catch (\Exception $e) {
-                // If our service is down or the request times out, we log the error
-                // on the client's server but do NOT crash their application process.
                 Log::error('CrudLog Service: Failed to send log to API. ' . $e->getMessage());
             }
         }

@@ -11,9 +11,6 @@ class ModelLoggableEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     */
     public function __construct(
         public string $action,
         public Model $loggable,
